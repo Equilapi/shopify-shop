@@ -4,6 +4,7 @@ import {Suspense} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
 import {Hero} from '~/components/Hero';
 import { CategoryLists } from '~/components/CategoryLists';
+import { OffersProducts } from '~/components/OffersProducts';
 
 /**
  * @type {MetaFunction}
@@ -20,18 +21,22 @@ export async function loader({context}) {
   const {collections} = await storefront.query(FEATURED_COLLECTION_QUERY);
   // const featuredCollection = collections.nodes[0];
   const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
+  const offersProducts = storefront.query(OFFERS_PRODUCTS_QUERY);
 
-  return defer({collections, recommendedProducts});
+  return defer({collections, recommendedProducts, offersProducts});
 }
 
 export default function Homepage() {
   /** @type {LoaderReturnData} */
   const data = useLoaderData();
+  console.log(data)
   return (
     <div className="home">
       <Hero /> 
+
       <CategoryLists collections={data.collections} /> 
       {/* <FeaturedCollection collection={data.featuredCollection} /> */}
+      <OffersProducts products={data.offersProducts}/>
       <RecommendedProducts products={data.recommendedProducts} />
     </div>
   );
@@ -98,6 +103,37 @@ function RecommendedProducts({products}) {
     </div>
   );
 }
+
+const OFFERS_PRODUCTS_QUERY = `#graphql
+fragment OfferProduct on Product {
+  id
+  title
+  handle
+  priceRange {
+    minVariantPrice {
+      amount
+      currencyCode
+    }
+  }
+  images(first: 1) {
+    nodes {
+      id
+      url
+      altText
+      width
+      height
+    }
+  }
+}
+query RecommendedProducts ($country: CountryCode, $language: LanguageCode)
+  @inContext(country: $country, language: $language) {
+  products(first: 4, sortKey: UPDATED_AT, reverse: true) {
+    nodes {
+      ...OfferProduct
+    }
+  }
+}
+`;
 
 const FEATURED_COLLECTION_QUERY = `#graphql
   fragment FeaturedCollection on Collection {
