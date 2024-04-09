@@ -1,17 +1,23 @@
-import {Await, NavLink} from '@remix-run/react';
-import {Suspense} from 'react';
-import {useRootLoaderData} from '~/root';
+import { Await, NavLink } from '@remix-run/react';
+import { Suspense } from 'react';
+import { useRootLoaderData } from '~/root';
+import { FaSearch } from "@react-icons/all-files/fa/FaSearch";
+import { Image } from '@shopify/hydrogen';
+import { FaShoppingCart } from "@react-icons/all-files/fa/FaShoppingCart";
 
 /**
  * @param {HeaderProps}
  */
-export function Header({header, isLoggedIn, cart}) {
-  const {shop, menu} = header;
+export function Header({ header, isLoggedIn, cart }) {
+  const { shop, menu } = header;
   return (
     <header className="header">
       <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
         {/* <strong>{shop.name}</strong> */}
-        LOGO
+        <Image
+          data={shop.brand.logo.image}
+          aspectRatio="2/1"
+        />
       </NavLink>
       <HeaderMenu
         menu={menu}
@@ -30,8 +36,8 @@ export function Header({header, isLoggedIn, cart}) {
  *   viewport: Viewport;
  * }}
  */
-export function HeaderMenu({menu, primaryDomainUrl, viewport}) {
-  const {publicStoreDomain} = useRootLoaderData();
+export function HeaderMenu({ menu, primaryDomainUrl, viewport }) {
+  const { publicStoreDomain } = useRootLoaderData();
   const className = `header-menu-${viewport}`;
 
   function closeAside(event) {
@@ -60,8 +66,8 @@ export function HeaderMenu({menu, primaryDomainUrl, viewport}) {
         // if the url is internal, we strip the domain
         const url =
           item.url.includes('myshopify.com') ||
-          item.url.includes(publicStoreDomain) ||
-          item.url.includes(primaryDomainUrl)
+            item.url.includes(publicStoreDomain) ||
+            item.url.includes(primaryDomainUrl)
             ? new URL(item.url).pathname
             : item.url;
         return (
@@ -85,7 +91,7 @@ export function HeaderMenu({menu, primaryDomainUrl, viewport}) {
 /**
  * @param {Pick<HeaderProps, 'isLoggedIn' | 'cart'>}
  */
-function HeaderCtas({isLoggedIn, cart}) {
+function HeaderCtas({ isLoggedIn, cart }) {
   return (
     <nav className="header-ctas" role="navigation">
       <HeaderMenuMobileToggle />
@@ -111,20 +117,20 @@ function HeaderMenuMobileToggle() {
 }
 
 function SearchToggle() {
-  return <a href="#search-aside">Search</a>;
+  return <a href="#search-aside"><FaSearch /> Search</a>;
 }
 
 /**
  * @param {{count: number}}
  */
-function CartBadge({count}) {
-  return <a href="#cart-aside">Cart {count}</a>;
+function CartBadge({ count }) {
+  return <a href="#cart-aside"><FaShoppingCart /> Cart {count}</a>;
 }
 
 /**
  * @param {Pick<HeaderProps, 'cart'>}
  */
-function CartToggle({cart}) {
+function CartToggle({ cart }) {
   return (
     <Suspense fallback={<CartBadge count={0} />}>
       <Await resolve={cart}>
@@ -185,7 +191,7 @@ const FALLBACK_HEADER_MENU = {
  *   isPending: boolean;
  * }}
  */
-function activeLinkStyle({isActive, isPending}) {
+function activeLinkStyle({ isActive, isPending }) {
   return {
     fontWeight: isActive ? 'bold' : undefined,
     color: isPending ? 'grey' : 'black',
