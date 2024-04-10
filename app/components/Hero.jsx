@@ -9,7 +9,9 @@ export function Hero() {
         slidesToShow: 1,
         slidesToScroll: 1,
         arrows: false,
-        autoPlay: true
+        autoplay: true,
+        speed: 2000,
+        autoplaySpeed: 2000,
     }
     return (
         <div className="hero">
