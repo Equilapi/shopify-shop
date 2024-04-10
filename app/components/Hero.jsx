@@ -8,7 +8,8 @@ export function Hero() {
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
-        arrows: false
+        arrows: false,
+        autoPlay: true
     }
     return (
         <div className="hero">
