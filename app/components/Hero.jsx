@@ -9,8 +9,8 @@ export function Hero() {
         slidesToScroll: 1,
         arrows: false,
         autoplay: true,
-        speed: 5000,
-        autoplaySpeed: 2000,
+        speed: 2000,
+        autoplaySpeed: 5000,
         infinite: true,
     }
     return (
