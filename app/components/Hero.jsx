@@ -15,15 +15,15 @@ export function Hero() {
             <Slider {...settings} className="home-slider">
                 <div className="slide">
                     <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit</h3>
-                    <a href="http://localhost:3000/products/copia-de-plant-4" className="link">Buy</a>
+                    <a href="#" className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-md px-8 py-4 text-center me-2 mb-2">Buy</a>
                 </div>
                 <div className="slide">
                     <h3>Lorem ipsum dolor sit amet consectetur</h3>
-                    <a href="http://localhost:3000/products/copia-de-plant-4" className="link">Buy</a>
+                    <a href="#" className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-md px-8 py-4 text-center me-2 mb-2">Buy</a>
                 </div>
                 <div className="slide">
                     <h3>Lorem ipsum dolor sit amet</h3>
-                    <a href="http://localhost:3000/products/copia-de-plant-4" className="link">Buy</a>
+                    <a href="#" className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-md px-8 py-4 text-center me-2 mb-2">Buy</a>
                 </div>
             </Slider>
         </div>

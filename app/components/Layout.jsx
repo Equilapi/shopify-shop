@@ -13,6 +13,7 @@ import {
  * @param {LayoutProps}
  */
 export function Layout({cart, children = null, footer, header, isLoggedIn}) {
+  console.log(header)
   return (
     <>
       <CartAside cart={cart} />
