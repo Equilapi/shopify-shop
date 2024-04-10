@@ -4,14 +4,14 @@ import Slider from "react-slick";
 export function Hero() {
     let settings = {
         dots: true,
-        infinite: false,
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
         arrows: false,
         autoplay: true,
-        speed: 2000,
+        speed: 5000,
         autoplaySpeed: 2000,
+        infinite: true,
     }
     return (
         <div className="hero">
